@@ -9,6 +9,7 @@ const config = {
 	entry: {
 		'podcasting-edit-post': './assets/js/podcasting-edit-post.js',
 		'podcasting-edit-term': './assets/js/podcasting-edit-term.js',
+		'transcript-block' :  './assets/js/transcript-block.js',
 		blocks: './assets/js/blocks.js'
 	},
 	output: {

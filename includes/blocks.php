@@ -24,6 +24,26 @@ function init() {
 		PODCASTING_VERSION
 	);
 
+	$transcript_block_js = 'dist/js/transcript-block.min.js';
+	wp_register_script(
+		'podcasting-block-transcript',
+		PODCASTING_URL . $transcript_block_js,
+		array(
+			'wp-blocks',
+			'wp-editor',
+			'wp-i18n',
+			'wp-element',
+		),
+		PODCASTING_VERSION
+	);
+
+	register_block_type(
+		'podcasting/podcast-transcript',
+		array(
+			'editor_script' => 'podcasting-block-transcript',
+		)
+	);
+
 	register_block_type(
 		'podcasting/podcast',
 		array(
