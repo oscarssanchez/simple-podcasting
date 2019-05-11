@@ -88,3 +88,26 @@ function load_translations() {
 	}
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\load_translations' );
+
+/**
+ * Registers meta key to be included in REST API.
+ *
+ * Enables Gutenberg to load saved post meta data.
+ *
+ */
+function transcript_register_meta() {
+	register_meta(
+		'post',
+		'podcast_transcript',
+		array(
+			'show_in_rest'  => true,
+			'single'        => true,
+			'type'          => 'string',
+			'auth_callback' => function() {
+				return current_user_can( 'edit_posts' );
+			},
+		)
+	);
+}
+
+add_action( 'init', __NAMESPACE__ . '\transcript_register_meta' );
