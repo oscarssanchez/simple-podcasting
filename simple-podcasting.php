@@ -17,6 +17,7 @@ define( 'PODCASTING_PATH', dirname( __FILE__ ) . '/' );
 define( 'PODCASTING_URL', plugin_dir_url( __FILE__ ) );
 define( 'TAXONOMY_NAME', 'podcasting_podcasts' );
 
+require_once PODCASTING_PATH . 'includes/transcript-endpoint.php';
 require_once PODCASTING_PATH . 'includes/datatypes.php';
 require_once PODCASTING_PATH . 'includes/helpers.php';
 require_once PODCASTING_PATH . 'includes/rest-external-url.php';

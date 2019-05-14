@@ -26,6 +26,50 @@ function add_podcasting_meta_box() {
 add_action( 'add_meta_boxes', __NAMESPACE__ . '\add_podcasting_meta_box' );
 
 /**
+ * Add a metabox for the podcast transcript
+ */
+function add_pocasting_transcript_meta_box() {
+	add_meta_box(
+		'podcasting-transcript',
+		__( 'Podcast Transcript', 'simple-podcasting' ),
+		__NAMESPACE__ . '\transcript_meta_box_html',
+		'post',
+		'advanced',
+		'default',
+		array(
+			'__back_compat_meta_box' => true,
+		)
+	);
+}
+
+add_action( 'add_meta_boxes', __NAMESPACE__ . '\add_pocasting_transcript_meta_box' );
+
+/**
+ * Output the Podcast Transcript meta box
+ *
+ * @param  object WP_Post $post The current post.
+ */
+function transcript_meta_box_html( $post ) {
+	wp_nonce_field( plugin_basename( __FILE__ ), 'simple-podcasting-transcript' );
+	$transcript = get_post_meta( $post->ID, 'podcast_transcript', true );
+
+	?>
+	<p class="howto"><?php echo esc_html_e( 'Enter the transcript of the current podcast here', 'simple-podcasting' ); ?></p>
+	<?php
+
+	wp_editor(
+		! empty( $transcript ) ? wp_kses_post( $transcript ) : '',
+		'podcast-transcript',
+		array(
+			'media_buttons' => false,
+			'textarea_name' => 'podcast_transcript',
+			'textarea_rows' => 8,
+		)
+	);
+}
+
+
+/**
  * Output the Podcasting meta box.
  *
  * @param  object WP_Post $post The current post.
@@ -83,7 +127,7 @@ function save_meta_box( $post_id ) {
 		return;
 	}
 
-	if ( empty( $_POST['simple-podcasting'] ) || ! wp_verify_nonce( $_POST['simple-podcasting'], plugin_basename( __FILE__ ) ) ) {
+	if ( empty( $_POST['simple-podcasting'] ) || ! wp_verify_nonce( $_POST['simple-podcasting'], plugin_basename( __FILE__ ) ) || ! wp_verify_nonce( $_POST['simple-podcasting-transcript'], plugin_basename( __FILE__ ) ) ) {
 		return;
 	}
 
@@ -134,6 +178,10 @@ function save_meta_box( $post_id ) {
 			update_post_meta( $post_id, 'podcast_duration', $podcast_meta['duration'] );
 			update_post_meta( $post_id, 'podcast_mime', $podcast_meta['podcast_mime'] );
 		}
+	}
+
+	if ( ! empty( $_post['podcast_transcript'] ) ) {
+		update_post_meta( $post_id, 'podcast_transcript', wp_kses_post( $_post['podcast_transcript'] ) );
 	}
 
 	update_post_meta( $post_id, 'podcast_explicit', $podcast_explicit );
