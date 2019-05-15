@@ -25,7 +25,7 @@ add_action( 'init', __NAMESPACE__ . '\add_transcript_endpoint' );
  *
  */
 function transcript_template( $template ) {
-	if ( ! empty( get_post_meta( get_the_ID(), 'podcast_transcript', true ) ) ) {
+	if ( ! empty( get_post_meta( get_the_ID(), 'podcast_transcript', true ) ) || ( has_blocks() && has_block( 'podcasting/podcast-transcript' ) ) ) {
 		if ( get_query_var( 'transcript', false ) !== false ) {
 			$transcript_template = locate_template( array( 'template-transcript.php' ) );
 			if ( '' !== $transcript_template ) {
