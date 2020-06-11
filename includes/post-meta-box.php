@@ -68,7 +68,6 @@ function transcript_meta_box_html( $post ) {
 	);
 }
 
-
 /**
  * Output the Podcasting meta box.
  *

@@ -29,12 +29,13 @@ endpoints\externalurl\setup();
  * Flush rewrite rules on plugin activation.
  *
  * `flush_rewrite_rules()` cannot just be hooked on directly
- * because the taxonomy is not yet registered at that point.
- * So we call the taxonomy registration function ourselves first.
+ * because the taxonomy/endpoint is not yet registered at that point.
+ * So we call the taxonomy and endpoint registration function ourselves first.
  *
  * @return void
  */
 function activate_plugin() {
+	add_transcript_endpoint();
 	create_podcasts_taxonomy();
 	\flush_rewrite_rules();
 }

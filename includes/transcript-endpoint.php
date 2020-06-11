@@ -9,7 +9,6 @@ namespace tenup_podcasting;
 
 /**
  * Adds and endpoint for transcript displaying
- *
  */
 function add_transcript_endpoint() {
 	add_rewrite_endpoint( 'transcript', EP_PERMALINK );
