@@ -20,9 +20,8 @@ add_action( 'init', __NAMESPACE__ . '\add_transcript_endpoint' );
 /**
  * Returns the template for transcript display
  *
- * @param $template
- * @return mixed
- *
+ * @param $template. The Transcript template
+ * @return mixed. The transcript template or normal post template if there's not one.
  */
 function transcript_template( $template ) {
 	if ( ! empty( get_post_meta( get_the_ID(), 'podcast_transcript', true ) ) || ( has_blocks() && has_block( 'podcasting/podcast-transcript' ) ) ) {

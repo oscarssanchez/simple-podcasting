@@ -94,6 +94,7 @@ add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\load_translations' 
  *
  * Enables Gutenberg to load saved post meta data.
  *
+ * @return void
  */
 function transcript_register_meta() {
 	register_meta(

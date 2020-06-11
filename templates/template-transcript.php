@@ -1,12 +1,10 @@
 <?php
 /**
- * The template for displaying all single posts
+ * Template to display transcripts of podcasts.
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ * Based on twentynineteen
  *
- * @package WordPress
- * @subpackage Twenty_Nineteen
- * @since 1.0.0
+ * @package tenup_podcasting
  */
 
 get_header();
